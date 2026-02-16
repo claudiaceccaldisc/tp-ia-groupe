@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { motion } from "framer-motion";
 
 interface DestinationCardProps {
   title: string;
@@ -6,7 +6,6 @@ interface DestinationCardProps {
   description: string;
   image: string;
   highlights: string[];
-  delay?: number;
 }
 
 export default function DestinationCard({
@@ -15,55 +14,80 @@ export default function DestinationCard({
   description,
   image,
   highlights,
-  delay = 0,
 }: DestinationCardProps) {
-  const [isHovered, setIsHovered] = useState(false);
+
+  // Prix indicatif selon destination
+  const getPrice = () => {
+    if (title.includes("Paris")) return "À partir de 20 000€";
+    if (title.includes("Florence")) return "À partir de 25 000€";
+    if (title.includes("Crétacé")) return "À partir de 35 000€";
+    return "À partir de 25 000€";
+  };
 
   return (
-    <div
-      className={`card-dark group overflow-hidden transition-all duration-700 animate-slide-up`}
-      style={{ animationDelay: `${delay}ms` }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      className="card-base group"
     >
-      <div className="relative h-64 overflow-hidden">
+      {/* IMAGE */}
+      <div className="relative h-56 sm:h-64 overflow-hidden">
         <img
           src={image}
           alt={title}
-          className={`w-full h-full object-cover transition-transform duration-500 ${
-            isHovered ? 'scale-110' : 'scale-100'
-          }`}
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
-        <div className={`absolute inset-0 bg-black transition-opacity duration-500 ${
-          isHovered ? 'opacity-20' : 'opacity-0'
-        }`} />
+        <div className="absolute inset-0 bg-black/20" />
       </div>
 
-      <div className="p-6">
-        <div className="flex items-center justify-between mb-3">
-          <h3 className="text-2xl font-playfair font-bold text-white">{title}</h3>
-          <span className="text-gold font-playfair text-lg">{year}</span>
+      {/* CONTENT */}
+      <div className="p-5 sm:p-6">
+
+        {/* TITRE + ANNÉE */}
+        <div className="flex justify-between items-center mb-3">
+          <h3 className="text-lg sm:text-xl font-bold">
+            {title}
+          </h3>
+          <span className="text-gold text-sm sm:text-base">
+            {year}
+          </span>
         </div>
 
-        <p className="text-gray-300 mb-4 text-sm">{description}</p>
+        {/* DESCRIPTION */}
+        <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-4">
+          {description}
+        </p>
 
-        <div className="space-y-2 mb-6">
-          {highlights.map((highlight, index) => (
-            <div key={index} className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-gold" />
-              <span className="text-gray-400 text-sm">{highlight}</span>
-            </div>
+        {/* PRIX */}
+        <div className="mb-4">
+          <p className="text-gold font-semibold text-base sm:text-lg">
+            {getPrice()}
+          </p>
+          <p className="text-xs text-gray-400">
+            Prix indicatif – usage pédagogique uniquement
+          </p>
+        </div>
+
+        {/* HIGHLIGHTS */}
+        <ul className="space-y-1 mb-6">
+          {highlights.map((item, index) => (
+            <li
+              key={index}
+              className="flex items-center gap-2 text-xs sm:text-sm text-gray-500 dark:text-gray-400"
+            >
+              <span className="w-2 h-2 bg-gold rounded-full" />
+              {item}
+            </li>
           ))}
-        </div>
+        </ul>
 
-        <button className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 ${
-          isHovered
-            ? 'bg-gold text-dark-bg'
-            : 'bg-dark-border text-gold border border-gold'
-        }`}>
-          Book Journey
+        {/* BOUTON */}
+        <button className="w-full py-2 sm:py-3 bg-gold text-black rounded-lg hover:opacity-90 transition">
+          Réserver
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 }
