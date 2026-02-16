@@ -2,9 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* BASE STYLES */
+
 @layer base {
   body {
-    @apply bg-dark-bg text-white font-inter transition-colors duration-500;
+    @apply bg-white text-black dark:bg-black dark:text-white font-inter transition-colors duration-500;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -12,16 +14,41 @@
   }
 }
 
+/* VARIABLES COULEURS */
+
+:root {
+  --gold: #d4af37;
+  --gold-light: #f5d76e;
+  --dark-bg: #0f0f0f;
+  --dark-card: #1a1a1a;
+  --dark-border: #2a2a2a;
+}
+
+.bg-gold {
+  background-color: var(--gold);
+}
+
+.text-gold {
+  color: var(--gold);
+}
+
+.border-gold {
+  border-color: var(--gold);
+}
+
+/* COMPONENTS */
+
 @layer components {
+
   .btn-primary {
-    @apply px-6 sm:px-8 py-3 bg-gold text-black font-semibold rounded-lg hover:opacity-90 transition-all duration-300;
+    @apply px-6 sm:px-8 py-3 bg-gold text-black font-semibold rounded-lg hover:opacity-90 hover:scale-105 transition-all duration-300;
   }
 
   .card-base {
-    @apply bg-white dark:bg-dark-card border border-gray-200 dark:border-dark-border rounded-2xl overflow-hidden shadow-lg transition-colors duration-500;
+    @apply bg-white dark:bg-[var(--dark-card)] border border-gray-200 dark:border-[var(--dark-border)] rounded-2xl overflow-hidden shadow-lg transition-all duration-500;
   }
 
   .section-title {
-    @apply text-3xl sm:text-4xl md:text-5xl font-playfair font-bold mb-6;
+    @apply text-3xl sm:text-4xl md:text-5xl font-playfair font-bold mb-6 tracking-wide;
   }
 }

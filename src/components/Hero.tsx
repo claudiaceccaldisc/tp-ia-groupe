@@ -2,35 +2,46 @@ import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
-    <section className="relative h-screen flex items-center justify-center text-center px-4">
+    <section className="relative h-[70vh] md:h-screen flex items-center justify-center text-center px-4 overflow-hidden">
 
       <video
         autoPlay
         muted
         loop
-        className="absolute inset-0 w-full h-full object-cover"
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
       >
         <source src="/hero.mp4" type="video/mp4" />
       </video>
 
-      <div className="absolute inset-0 bg-black/60" />
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/50 dark:bg-black/70" />
 
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-        className="relative z-10"
+        className="
+          relative z-10 
+          border border-gold/50 
+          bg-white/10 dark:bg-black/40 
+          backdrop-blur-md 
+          p-6 md:p-10 
+          rounded-xl
+        "
       >
-        <h1 className="text-4xl md:text-6xl font-bold mb-6">
+        <h1 className="
+          text-3xl md:text-6xl font-bold mb-6
+          text-white dark:text-white
+        ">
           TimeTravel Agency
         </h1>
 
-        <p className="text-lg md:text-2xl mb-4">
+        <p className="
+          text-base md:text-2xl
+          text-white dark:text-white
+        ">
           Explorez l’Histoire. Vivez l’impossible.
-        </p>
-
-        <p className="text-sm md:text-base text-gray-300 max-w-xl mx-auto">
-          Chaque voyage est une immersion exclusive dans les moments les plus fascinants de l’humanité.
         </p>
       </motion.div>
     </section>
