@@ -14,18 +14,34 @@ const SoundContext = createContext<SoundContextType>({
 
 export const SoundProvider = ({ children }: any) => {
   const ambientRef = useRef<HTMLAudioElement | null>(null);
+  const effectsRef = useRef<{
+    dino: HTMLAudioElement;
+    renaissance: HTMLAudioElement;
+    paris: HTMLAudioElement;
+  } | null>(null);
+
   const [isAmbientMuted, setIsAmbientMuted] = useState(true);
 
   useEffect(() => {
+    // 🎼 Ambient
     const ambient = new Audio("/sounds/ambient.mp3");
     ambient.loop = true;
     ambient.volume = 0.25;
     ambient.muted = true;
-
     ambientRef.current = ambient;
-
-    // Autoplay muted autorisé
     ambient.play().catch(() => {});
+
+    // 🔊 Préchargement des effets
+    effectsRef.current = {
+      dino: new Audio("/sounds/dino.mp3"),
+      renaissance: new Audio("/sounds/renaissance.mp3"),
+      paris: new Audio("/sounds/belle-epoque.mp3"),
+    };
+
+    Object.values(effectsRef.current).forEach((audio) => {
+      audio.volume = 0.5;
+      audio.load();
+    });
 
     const unlockAudio = () => {
       if (!ambientRef.current) return;
@@ -47,7 +63,6 @@ export const SoundProvider = ({ children }: any) => {
     };
   }, []);
 
-  // Toggle musique uniquement
   const toggleAmbient = () => {
     if (!ambientRef.current) return;
 
@@ -56,16 +71,12 @@ export const SoundProvider = ({ children }: any) => {
     setIsAmbientMuted(newState);
   };
 
-  // Effets toujours actifs
   const playEffect = (type: "dino" | "renaissance" | "paris") => {
-    const soundMap = {
-      dino: "/sounds/dino.mp3",
-      renaissance: "/sounds/renaissance.mp3",
-      paris: "/sounds/belle-epoque.mp3",
-    };
+    if (!effectsRef.current) return;
 
-    const audio = new Audio(soundMap[type]);
-    audio.volume = 0.5;
+    const audio = effectsRef.current[type];
+
+    audio.currentTime = 0; // permet rejouer rapidement
     audio.play().catch(() => {});
   };
 
