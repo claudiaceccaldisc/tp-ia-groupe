@@ -15,7 +15,6 @@ const SoundContext = createContext<SoundContextType>({
 export const SoundProvider = ({ children }: any) => {
   const ambientRef = useRef<HTMLAudioElement | null>(null);
   const [isMuted, setIsMuted] = useState(true);
-  const [hasInteracted, setHasInteracted] = useState(false);
 
   useEffect(() => {
     const ambient = new Audio("/sounds/ambient.mp3");
@@ -25,17 +24,15 @@ export const SoundProvider = ({ children }: any) => {
 
     ambientRef.current = ambient;
 
-    // Autoplay muted (autorisé)
+    // Autoplay muted (autorisé par navigateur)
     ambient.play().catch(() => {});
 
-    // Fonction pour débloquer l’audio au premier clic
     const unlockAudio = () => {
       if (!ambientRef.current) return;
 
       ambientRef.current.muted = false;
       ambientRef.current.play().catch(() => {});
       setIsMuted(false);
-      setHasInteracted(true);
 
       window.removeEventListener("click", unlockAudio);
       window.removeEventListener("touchstart", unlockAudio);
