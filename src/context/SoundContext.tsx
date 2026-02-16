@@ -2,19 +2,19 @@ import { createContext, useContext, useEffect, useRef, useState } from "react";
 
 interface SoundContextType {
   playEffect: (type: "dino" | "renaissance" | "paris") => void;
-  toggleMute: () => void;
-  isMuted: boolean;
+  toggleAmbient: () => void;
+  isAmbientMuted: boolean;
 }
 
 const SoundContext = createContext<SoundContextType>({
   playEffect: () => {},
-  toggleMute: () => {},
-  isMuted: true,
+  toggleAmbient: () => {},
+  isAmbientMuted: true,
 });
 
 export const SoundProvider = ({ children }: any) => {
   const ambientRef = useRef<HTMLAudioElement | null>(null);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isAmbientMuted, setIsAmbientMuted] = useState(true);
 
   useEffect(() => {
     const ambient = new Audio("/sounds/ambient.mp3");
@@ -24,7 +24,7 @@ export const SoundProvider = ({ children }: any) => {
 
     ambientRef.current = ambient;
 
-    // Autoplay muted (autorisé par navigateur)
+    // Autoplay muted autorisé
     ambient.play().catch(() => {});
 
     const unlockAudio = () => {
@@ -32,7 +32,7 @@ export const SoundProvider = ({ children }: any) => {
 
       ambientRef.current.muted = false;
       ambientRef.current.play().catch(() => {});
-      setIsMuted(false);
+      setIsAmbientMuted(false);
 
       window.removeEventListener("click", unlockAudio);
       window.removeEventListener("touchstart", unlockAudio);
@@ -47,9 +47,17 @@ export const SoundProvider = ({ children }: any) => {
     };
   }, []);
 
-  const playEffect = (type: "dino" | "renaissance" | "paris") => {
-    if (isMuted) return;
+  // Toggle musique uniquement
+  const toggleAmbient = () => {
+    if (!ambientRef.current) return;
 
+    const newState = !isAmbientMuted;
+    ambientRef.current.muted = newState;
+    setIsAmbientMuted(newState);
+  };
+
+  // Effets toujours actifs
+  const playEffect = (type: "dino" | "renaissance" | "paris") => {
     const soundMap = {
       dino: "/sounds/dino.mp3",
       renaissance: "/sounds/renaissance.mp3",
@@ -61,16 +69,10 @@ export const SoundProvider = ({ children }: any) => {
     audio.play().catch(() => {});
   };
 
-  const toggleMute = () => {
-    if (!ambientRef.current) return;
-
-    const newState = !isMuted;
-    ambientRef.current.muted = newState;
-    setIsMuted(newState);
-  };
-
   return (
-    <SoundContext.Provider value={{ playEffect, toggleMute, isMuted }}>
+    <SoundContext.Provider
+      value={{ playEffect, toggleAmbient, isAmbientMuted }}
+    >
       {children}
     </SoundContext.Provider>
   );
