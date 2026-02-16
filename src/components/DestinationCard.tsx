@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useSound } from "../context/SoundContext";
 
 interface DestinationCardProps {
   title: string;
@@ -15,6 +16,7 @@ export default function DestinationCard({
   image,
   highlights,
 }: DestinationCardProps) {
+  const { playEffect } = useSound();
 
   // Prix indicatif selon destination
   const getPrice = () => {
@@ -24,22 +26,28 @@ export default function DestinationCard({
     return "À partir de 25 000€";
   };
 
+  const handleClick = () => {
+    if (title.includes("Crétacé")) playEffect("dino");
+    else if (title.includes("Florence")) playEffect("renaissance");
+    else if (title.includes("Paris")) playEffect("paris");
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true }}
-      className="card-base group"
+      className="card-base group hover:shadow-2xl hover:-translate-y-2 transition-all duration-500"
     >
       {/* IMAGE */}
-      <div className="relative h-56 sm:h-64 overflow-hidden">
+      <div className="relative h-52 sm:h-60 md:h-64 overflow-hidden">
         <img
           src={image}
           alt={title}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
       </div>
 
       {/* CONTENT */}
@@ -47,16 +55,16 @@ export default function DestinationCard({
 
         {/* TITRE + ANNÉE */}
         <div className="flex justify-between items-center mb-3">
-          <h3 className="text-lg sm:text-xl font-bold">
+          <h3 className="text-lg sm:text-xl font-bold tracking-wide">
             {title}
           </h3>
-          <span className="text-gold text-sm sm:text-base">
+          <span className="text-gold text-sm sm:text-base font-semibold">
             {year}
           </span>
         </div>
 
         {/* DESCRIPTION */}
-        <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-4">
+        <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
           {description}
         </p>
 
@@ -71,7 +79,7 @@ export default function DestinationCard({
         </div>
 
         {/* HIGHLIGHTS */}
-        <ul className="space-y-1 mb-6">
+        <ul className="space-y-2 mb-6">
           {highlights.map((item, index) => (
             <li
               key={index}
@@ -84,7 +92,10 @@ export default function DestinationCard({
         </ul>
 
         {/* BOUTON */}
-        <button className="w-full py-2 sm:py-3 bg-gold text-black rounded-lg hover:opacity-90 transition">
+        <button
+          onClick={handleClick}
+          className="w-full py-2 sm:py-3 bg-gold text-black rounded-lg font-semibold tracking-wide hover:scale-105 hover:opacity-90 transition-all duration-300"
+        >
           Réserver
         </button>
       </div>

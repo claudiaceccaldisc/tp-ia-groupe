@@ -41,10 +41,17 @@ const destinations = [
 
 export default function Destinations() {
   return (
-    <section className="py-16 px-4 bg-dark-bg">
+    <section className="py-16 px-4 bg-white dark:bg-black transition-colors duration-500">
+
       <div className="max-w-7xl mx-auto text-center mb-12">
-        <h2 className="section-title">Destinations temporelles</h2>
-        <p className="text-gray-400">
+        <h2 className="
+          section-title
+          text-black dark:text-white
+        ">
+          Destinations temporelles
+        </h2>
+
+        <p className="text-gray-600 dark:text-gray-400">
           Sélectionnez votre expérience exclusive.
         </p>
       </div>

@@ -1,93 +1,195 @@
-# TimeTravel Agency
+# 🚀 TimeTravel Agency -- Webapp Interactive
 
-Webapp interactive développée dans le cadre du module IA M1/M2 à Ynov.
+Application web développée dans le cadre du Projet Supervisé IA (M1/M2)d'Ynov
+-- Session 2 : Webapp et IA Agents.
 
-L’objectif du projet était de créer une application web immersive pour une agence fictive de voyage temporel, intégrant un agent conversationnel IA et une fonctionnalité de personnalisation.
+TimeTravel Agency est une agence fictive de voyage temporel haut de
+gamme proposant des immersions dans différentes époques historiques.\
+Cette application combine développement frontend moderne, intelligence
+artificielle générative et automatisation intelligente pour offrir une
+expérience immersive et interactive.
 
----
+------------------------------------------------------------------------
 
-## Objectifs du projet
+## 🎯 Objectif du Projet
 
-- Créer une webapp moderne et responsive
-- Intégrer des assets générés lors du module précédent (images + vidéo)
-- Mettre en place un agent conversationnel intelligent
-- Ajouter une fonctionnalité de recommandation personnalisée (quiz)
-- Déployer l’application en ligne
+Créer une webapp interactive intégrant :
 
----
+-   Une landing page immersive
+-   Une galerie de destinations temporelles
+-   Un agent conversationnel IA
+-   Une fonctionnalité d'automatisation/personnalisation
+-   Un déploiement en production
 
-## Stack technique
+------------------------------------------------------------------------
 
-- React + Vite
-- TypeScript
-- Tailwind CSS
-- Framer Motion (animations)
-- Mistral AI (modèle mistral-small)
-- Déploiement : Vercel
+## 🧱 Stack Technique
 
----
+-   **React + TypeScript**
+-   **Vite**
+-   **Tailwind CSS**
+-   **Framer Motion (animations)**
+-   **API Mistral AI (modèle mistral-small)**
+-   **Vercel (déploiement)**
+-   Git / GitHub (versioning)
 
-## Fonctionnalités implémentées
+------------------------------------------------------------------------
 
-- Landing page immersive avec vidéo en arrière-plan
-- Mode sombre / mode clair
-- 3 destinations temporelles :
-  - Paris 1889
-  - Florence 1504
-  - Crétacé
-- Affichage de prix indicatifs (usage pédagogique uniquement)
-- Quiz personnalisé recommandant une destination
-- Chatbot IA conversationnel (réponses contextualisées)
-- Interface responsive mobile-first (optimisée iPhone 16 Pro)
+## ✨ Fonctionnalités Implémentées
 
----
+### 1️⃣ Landing Page Immersive
 
-## IA utilisées
+-   Hero section avec vidéo en arrière-plan
+-   Design premium sombre (noir & doré)
+-   Responsive (mobile-first)
+-   Mention légale sur les prix fictifs
 
-- Génération initiale de la structure : Bolt.new
-- Assistant conversationnel : Mistral AI (mistral-small)
+### 2️⃣ Galerie des Destinations
 
-Le chatbot est configuré avec un system prompt personnalisé afin d’assurer :
-- Un ton professionnel et immersif
-- Des réponses cohérentes avec les destinations
-- Des recommandations adaptées aux profils utilisateurs
+-   **Paris 1889** -- Belle Époque\
+-   **Florence 1504** -- Renaissance\
+-   **Crétacé -- 65M av. J.-C.** -- Ère des dinosaures
 
----
+Fonctionnalités : - Cards interactives - Affichage dynamique des prix
+(usage pédagogique) - Animations au scroll (Framer Motion)
 
-## Mention importante
+### 3️⃣ 🤖 Chatbot IA (API Mistral)
 
-Les prix affichés sont fictifs et utilisés uniquement dans le cadre du projet pédagogique.
+-   Widget flottant en bas à droite
+-   Personality définie via prompt système
+-   Réponses en français uniquement
+-   Texte simple (sans markdown)
+-   Gestion des erreurs
+-   Gestion du loading
 
----
+Capacités : - Explication des destinations - Conseils personnalisés -
+Informations sur les prix (fictifs) - Réponses type FAQ - Suggestions
+adaptées aux intérêts utilisateurs
 
-## Lancer le projet en local
+### 4️⃣ 🧠 Quiz Intelligent (Automatisation & Personnalisation)
 
-1. Cloner le repository :
+-   Quiz interactif en 4 questions
+-   Algorithme de scoring simple
+-   Recommandation automatique d'une destination
+-   Génération d'une explication personnalisée via IA
+-   Nettoyage du formatage des réponses
 
-```bash
-git clone https://github.com/claudiaceccaldisc/tp-ia-groupe.git
-cd tp-ia-groupe
+Cette fonctionnalité répond à l'exigence d'automatisation intelligente
+du projet.
 
-```
-2. Installer les dépendances :
+### 5️⃣ 🌙 Dark Mode
 
+-   Toggle clair/sombre
+-   Gestion via ThemeContext
+-   Transitions fluides
+
+### 6️⃣ 🌍 Déploiement
+
+-   Déploiement via Vercel
+-   Variables d'environnement sécurisées
+-   URL publique fonctionnelle
+
+------------------------------------------------------------------------
+
+## 🤖 Outils IA Utilisés
+
+-   Generation structure de base de l'application via Bolt.new
+-   API Mistral AI (mistral-small) pour :
+    -   Chatbot conversationnel
+    -   Génération d'explications personnalisées
+-   Itérations de prompts pour affiner la personnalité et la qualité des
+    réponses
+
+------------------------------------------------------------------------
+
+## 🧠 Exemple de Prompt Système (Chatbot)
+
+Le chatbot est configuré comme suit :
+
+> Tu es l'assistant virtuel officiel de TimeTravel Agency.\
+> Tu réponds en français uniquement.\
+> Tu es professionnel, immersif et structuré.\
+> Tu n'utilises pas de markdown ni de formatage spécial.
+
+Destinations disponibles : - Paris 1889 - Florence 1504 - Crétacé (65
+millions d'années)
+
+Les prix sont fictifs et utilisés uniquement à des fins pédagogiques.
+
+------------------------------------------------------------------------
+
+## 🔐 Sécurité
+
+-   Clé API stockée dans un fichier `.env`
+-   `.env` ignoré via `.gitignore`
+-   Aucune clé sensible pushée sur GitHub
+-   Variable configurée sur Vercel
+
+------------------------------------------------------------------------
+
+## 📂 Structure du Projet
+
+    src/
+     ├── components/
+     │    ├── Hero.tsx
+     │    ├── Destinations.tsx
+     │    ├── DestinationCard.tsx
+     │    ├── Quiz.tsx
+     │    └── ChatbotButton.tsx
+     ├── context/
+     │    └── ThemeContext.tsx
+     ├── App.tsx
+     ├── main.tsx
+     └── index.css
+
+------------------------------------------------------------------------
+
+## 🚀 Installation en Local
+
+``` bash
 npm install
-
-3. Créer un fichier .env à la racine :
-
-VITE_MISTRAL_API_KEY=VOTRE_CLE_ICI
-
-4. Lancer le serveur :
-
 npm run dev
+```
 
-Puis ouvrir :
+Créer un fichier `.env` :
 
-http://localhost:5173
+    VITE_MISTRAL_API_KEY=your_api_key_here
 
+------------------------------------------------------------------------
 
-## Déploiement
+## 📖 Couverture des Critères d'Évaluation
 
-L’application est déployée via Vercel.
+✔ Webapp fonctionnelle et déployée\
+✔ Structure React claire et maintenable\
+✔ Agent conversationnel opérationnel\
+✔ Fonctionnalité d'automatisation intelligente\
+✔ Design professionnel et cohérent\
+✔ Documentation et transparence IA
 
-Les variables d’environnement (clé Mistral) sont configurées directement dans les paramètres du projet Vercel.
+------------------------------------------------------------------------
+
+## 📝 Licence
+
+Projet pédagogique -- M1/M2 Digital & IA\
+TimeTravel Agency est un projet fictif à usage académique uniquement.
+
+------------------------------------------------------------------------
+
+## 👥 Travail en Groupe
+
+Membre du groupe :
+
+Claudia CECCALDI
+Chloé LEONARD
+Arnaud PINATEL
+
+Projet réalisé en groupe (3 étudiants).\
+Rendu individuel comprenant :
+
+-   URL publique de la webapp
+-   Repository GitHub
+-   Documentation technique (README)
+
+------------------------------------------------------------------------
+
+Développé avec assistance d'outils d'IA générative et d'aide au code.

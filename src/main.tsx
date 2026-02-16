@@ -3,11 +3,14 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import { ThemeProvider } from "./context/ThemeContext";
+import { SoundProvider } from "./context/SoundContext";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ThemeProvider>
-      <App />
+      <SoundProvider>
+        <App />
+      </SoundProvider>
     </ThemeProvider>
   </React.StrictMode>
 );

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { MessageCircle, X } from "lucide-react";
 
 interface Message {
   role: "user" | "assistant";
@@ -11,11 +12,17 @@ export default function ChatbotButton() {
     {
       role: "assistant",
       content:
-        "Bonjour 👋 Je suis votre assistant TimeTravel Agency. Posez-moi vos questions sur nos destinations temporelles."
+        "Bonjour. Je suis votre assistant TimeTravel Agency. Posez-moi vos questions sur nos destinations temporelles."
     }
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
+
+  // Scroll auto vers le bas
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,22 +55,19 @@ Tu es l'assistant virtuel officiel de TimeTravel Agency.
 Tu réponds en français uniquement.
 
 Règles importantes :
-- Ne mets pas de markdown.
-- N'utilise pas d'astérisques.
-- N'utilise pas de gras ou de formatage spécial.
-- Écris uniquement en texte simple.
-- Sois clair, immersif et professionnel.
+- Texte simple uniquement
+- Pas de markdown
+- Pas d’astérisques
+- Pas de symboles décoratifs
+- Ton professionnel et immersif
 
-Les destinations disponibles sont :
+Destinations :
 - Paris 1889
 - Florence 1504
-- Crétacé (65 millions d'années)
+- Crétacé
 
-Les prix sont fictifs et utilisés uniquement dans un cadre pédagogique.
-
-Réponds toujours de manière structurée mais sans symboles spéciaux.
+Les prix sont fictifs et pédagogiques.
 `
-
               },
               ...updatedMessages
             ]
@@ -75,11 +79,11 @@ Réponds toujours de manière structurée mais sans symboles spéciaux.
 
       const botReply: Message = {
         role: "assistant",
-        content: data.choices[0].message.content
+        content: data.choices[0]?.message?.content || "Réponse indisponible."
       };
 
       setMessages([...updatedMessages, botReply]);
-    } catch (error) {
+    } catch {
       setMessages([
         ...updatedMessages,
         {
@@ -98,27 +102,39 @@ Réponds toujours de manière structurée mais sans symboles spéciaux.
       {/* BOUTON FLOTTANT */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 w-16 h-16 rounded-full bg-gold text-dark-bg text-2xl shadow-xl hover:scale-110 transition-all duration-300 z-50"
+        className="fixed bottom-5 right-5 w-14 h-14 rounded-full bg-gold text-black shadow-xl flex items-center justify-center hover:scale-110 transition-all duration-300 z-50"
       >
-        💬
+        {isOpen ? <X size={22} /> : <MessageCircle size={22} />}
       </button>
 
       {/* FENÊTRE CHAT */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 w-96 max-w-[95%] h-[500px] bg-dark-card border border-dark-border rounded-2xl shadow-2xl flex flex-col z-40">
+        <div className="
+          fixed 
+          bottom-20 right-4 
+          w-[92%] sm:w-96 
+          h-[420px] sm:h-[520px] 
+          bg-white dark:bg-[#1a1a1a] 
+          border border-gray-200 dark:border-[#2a2a2a] 
+          rounded-2xl shadow-2xl 
+          flex flex-col 
+          z-40
+          transition-all duration-300
+        ">
 
           {/* HEADER */}
           <div className="bg-gradient-to-r from-gold to-yellow-500 p-4 rounded-t-2xl">
-            <h3 className="font-playfair font-bold text-dark-bg text-lg">
+            <h3 className="font-playfair font-bold text-black text-lg">
               Assistant TimeTravel
             </h3>
-            <p className="text-dark-bg/80 text-sm">
+            <p className="text-black/70 text-sm">
               Conseiller en voyages temporels
             </p>
           </div>
 
           {/* MESSAGES */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-gold/40">
+
             {messages.map((msg, index) => (
               <div
                 key={index}
@@ -127,10 +143,10 @@ Réponds toujours de manière structurée mais sans symboles spéciaux.
                 }`}
               >
                 <div
-                  className={`max-w-xs px-4 py-2 rounded-lg text-sm ${
+                  className={`max-w-[75%] px-4 py-2 rounded-xl text-sm leading-relaxed ${
                     msg.role === "user"
-                      ? "bg-gold text-dark-bg"
-                      : "bg-dark-border text-gray-200"
+                      ? "bg-gold text-black"
+                      : "bg-gray-100 dark:bg-[#2a2a2a] text-gray-800 dark:text-gray-200"
                   }`}
                 >
                   {msg.content}
@@ -139,16 +155,18 @@ Réponds toujours de manière structurée mais sans symboles spéciaux.
             ))}
 
             {loading && (
-              <div className="text-gray-400 text-sm">
+              <div className="text-gray-400 text-sm animate-pulse">
                 L’assistant réfléchit...
               </div>
             )}
+
+            <div ref={messagesEndRef} />
           </div>
 
           {/* INPUT */}
           <form
             onSubmit={sendMessage}
-            className="p-4 border-t border-dark-border"
+            className="p-3 border-t border-gray-200 dark:border-[#2a2a2a]"
           >
             <div className="flex gap-2">
               <input
@@ -156,13 +174,13 @@ Réponds toujours de manière structurée mais sans symboles spéciaux.
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Posez votre question..."
-                className="flex-1 bg-dark-border text-white rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gold"
+                className="flex-1 bg-gray-100 dark:bg-[#2a2a2a] text-black dark:text-white rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gold"
               />
               <button
                 type="submit"
-                className="bg-gold text-dark-bg font-bold px-4 py-2 rounded-lg hover:opacity-90 transition-all duration-300"
+                className="bg-gold text-black font-semibold px-4 py-2 rounded-lg hover:scale-105 transition-all duration-200"
               >
-                Envoyer
+                OK
               </button>
             </div>
           </form>
