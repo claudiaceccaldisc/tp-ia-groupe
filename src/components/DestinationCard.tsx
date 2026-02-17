@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { useSound } from "../context/SoundContext";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface DestinationCardProps {
