@@ -17,20 +17,23 @@ export default function App() {
   const location = useLocation();
 
   return (
-    <div className={`${dark ? "bg-black text-white" : "bg-white text-black"} min-h-screen transition-colors duration-500`}>
-
-      {/* Theme Toggle */}
+    <div
+      className={`${
+        dark ? "bg-black text-white" : "bg-white text-black"
+      } min-h-screen transition-colors duration-500`}
+    >
+      {/* HEADER CONTROLS */}
       <div className="fixed top-4 right-4 z-50 flex gap-3">
         <button
           onClick={toggleTheme}
-          className="p-3 rounded-full bg-gold text-black shadow-lg hover:scale-110 transition"
+          className="p-3 rounded-full bg-silver text-black shadow-lg hover:scale-110 hover:opacity-90 transition-all duration-300"
         >
           {dark ? <Sun size={18} /> : <Moon size={18} />}
         </button>
 
         <button
           onClick={toggleMute}
-          className="p-3 rounded-full bg-gold text-black shadow-lg hover:scale-110 transition"
+          className="p-3 rounded-full bg-silver text-black shadow-lg hover:scale-110 hover:opacity-90 transition-all duration-300"
         >
           {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
         </button>
@@ -52,11 +55,12 @@ export default function App() {
                   <div className="flex justify-center mt-8">
                     <button
                       onClick={() => navigate("/reservations")}
-                      className="px-6 py-3 bg-gold text-black rounded-lg font-semibold hover:scale-105 hover:opacity-90 transition-all duration-300"
+                      className="px-6 py-3 bg-silver text-black rounded-lg font-semibold hover:scale-105 hover:opacity-90 transition-all duration-300"
                     >
                       Voir les réservations effectuées
                     </button>
                   </div>
+
                   <Hero />
                   <Destinations />
                   <Quiz />
@@ -64,18 +68,22 @@ export default function App() {
                 </>
               }
             />
+
             <Route path="/reservation" element={<Reservation />} />
             <Route path="/reservations" element={<Reservations />} />
           </Routes>
         </motion.div>
       </AnimatePresence>
 
-      <div className="text-center text-xs text-gray-400 py-4">
-        Les prix affichés sont fictifs et utilisés uniquement à des fins pédagogiques.
-      </div>
-      <div className="text-center text-xs text-gray-400 py-3">
-         Site créé par CECCALDI Claudia, LEONARD Chloé, PINATEL Arnaud
-      </div>
+      {/* FOOTER */}
+      <footer className="text-center text-xs text-gray-400 py-6 px-4 space-y-2">
+        <div>
+          Les prix affichés sont fictifs et utilisés uniquement à des fins pédagogiques.
+        </div>
+        <div>
+          Site créé par CECCALDI Claudia, LEONARD Chloé, PINATEL Arnaud
+        </div>
+      </footer>
     </div>
   );
 }

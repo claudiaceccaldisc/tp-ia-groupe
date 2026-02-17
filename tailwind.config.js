@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        gold: "#D4AF37",
+        silver: "#C9CED6",
         "dark-bg": "#0f0f0f",
         "dark-card": "#1a1a1a",
         "dark-border": "#2d2d2d",

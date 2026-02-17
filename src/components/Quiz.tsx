@@ -1,37 +1,43 @@
 import { useState } from "react";
+import { destinations } from "./Destinations";
 
 interface Scores {
-  paris: number;
-  florence: number;
-  cretace: number;
+  [key: string]: number;
 }
 
 export default function Quiz() {
   const [step, setStep] = useState(1);
-  const [scores, setScores] = useState<Scores>({
-    paris: 0,
-    florence: 0,
-    cretace: 0,
-  });
+  const [scores, setScores] = useState<Scores>({});
   const [result, setResult] = useState<string | null>(null);
   const [explanation, setExplanation] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const updateScore = (type: keyof Scores) => {
+  const totalSteps = 4;
+
+  const addPoint = (destination: string) => {
     setScores((prev) => ({
       ...prev,
-      [type]: prev[type] + 1,
+      [destination]: (prev[destination] || 0) + 1,
     }));
-    setStep(step + 1);
+
+    if (step < totalSteps) {
+      setStep((prev) => prev + 1);
+    } else {
+      calculateResult();
+    }
   };
 
   const calculateResult = async () => {
-    const winner =
-      scores.paris >= scores.florence && scores.paris >= scores.cretace
-        ? "Paris 1889"
-        : scores.florence >= scores.paris && scores.florence >= scores.cretace
-        ? "Florence 1504"
-        : "Crétacé";
+    let winner = destinations[0]?.title || "Destination inconnue";
+    let maxScore = -1;
+
+    destinations.forEach((dest) => {
+      const score = scores[dest.title] || 0;
+      if (score > maxScore) {
+        maxScore = score;
+        winner = dest.title;
+      }
+    });
 
     setResult(winner);
     setLoading(true);
@@ -50,15 +56,12 @@ export default function Quiz() {
             messages: [
               {
                 role: "system",
-                content: `
-Tu es un conseiller en voyage temporel.
-Explique en 3 à 4 phrases pourquoi la destination suivante correspond parfaitement au profil de l'utilisateur.
-Réponds uniquement en texte simple.
-`,
+                content:
+                  "Explique en 3 phrases pourquoi cette destination correspond au profil.",
               },
               {
                 role: "user",
-                content: `Destination recommandée : ${winner}`,
+                content: `Destination : ${winner}`,
               },
             ],
           }),
@@ -67,11 +70,19 @@ Réponds uniquement en texte simple.
 
       const data = await response.json();
 
-      const cleaned = data.choices[0].message.content
-        .replace(/\*\*/g, "")
-        .replace(/\*/g, "");
+const rawText =
+  data?.choices?.[0]?.message?.content ||
+  "Recommandation générée avec succès.";
 
-      setExplanation(cleaned);
+const cleanedText = rawText
+  .replace(/\*\*/g, "")        // enlève **
+  .replace(/\*/g, "")          // enlève *
+  .replace(/^\d+\.\s*/gm, "")  // enlève 1. 2. 3.
+  .replace(/\n+/g, " ")        // enlève retours ligne multiples
+  .trim();
+
+setExplanation(cleanedText);
+
     } catch {
       setExplanation(
         "Une explication personnalisée n'a pas pu être générée."
@@ -83,14 +94,18 @@ Réponds uniquement en texte simple.
 
   const resetQuiz = () => {
     setStep(1);
-    setScores({ paris: 0, florence: 0, cretace: 0 });
+    setScores({});
     setResult(null);
     setExplanation("");
   };
 
+  if (!destinations || destinations.length === 0) {
+    return null;
+  }
+
   return (
     <section className="py-20 px-4 text-center">
-      <h2 className="section-title mb-8">
+      <h2 className="section-title mb-12">
         Trouvez votre époque idéale
       </h2>
 
@@ -99,82 +114,79 @@ Réponds uniquement en texte simple.
 
           {step === 1 && (
             <>
-              <h3>Quel type d'expérience recherchez-vous ?</h3>
-              <button onClick={() => updateScore("florence")} className="btn-primary w-full">
-                Culturelle et artistique
+              <h3>Quel type d’ambiance recherchez-vous ?</h3>
+              <button onClick={() => addPoint(destinations[0].title)} className="btn-primary w-full">
+                Culture et élégance
               </button>
-              <button onClick={() => updateScore("cretace")} className="btn-primary w-full">
+              <button onClick={() => addPoint(destinations[2].title)} className="btn-primary w-full">
                 Aventure et nature
               </button>
-              <button onClick={() => updateScore("paris")} className="btn-primary w-full">
-                Élégance et raffinement
+              <button onClick={() => addPoint(destinations[5].title)} className="btn-primary w-full">
+                Tradition et spiritualité
               </button>
             </>
           )}
 
           {step === 2 && (
             <>
-              <h3>Votre période préférée ?</h3>
-              <button onClick={() => updateScore("paris")} className="btn-primary w-full">
-                Histoire moderne
+              <h3>Votre environnement préféré ?</h3>
+              <button onClick={() => addPoint(destinations[3].title)} className="btn-primary w-full">
+                Civilisation antique
               </button>
-              <button onClick={() => updateScore("cretace")} className="btn-primary w-full">
-                Temps anciens
+              <button onClick={() => addPoint(destinations[7].title)} className="btn-primary w-full">
+                Montagnes mystérieuses
               </button>
-              <button onClick={() => updateScore("florence")} className="btn-primary w-full">
-                Renaissance
+              <button onClick={() => addPoint(destinations[4].title)} className="btn-primary w-full">
+                Île sauvage
               </button>
             </>
           )}
 
           {step === 3 && (
             <>
-              <h3>Vous préférez :</h3>
-              <button onClick={() => updateScore("paris")} className="btn-primary w-full">
-                L'effervescence urbaine
+              <h3>Votre activité idéale ?</h3>
+              <button onClick={() => addPoint(destinations[1].title)} className="btn-primary w-full">
+                Art et architecture
               </button>
-              <button onClick={() => updateScore("cretace")} className="btn-primary w-full">
-                La nature sauvage
+              <button onClick={() => addPoint(destinations[6].title)} className="btn-primary w-full">
+                Théâtre et intrigues
               </button>
-              <button onClick={() => updateScore("florence")} className="btn-primary w-full">
-                L'art et l'architecture
+              <button onClick={() => addPoint(destinations[2].title)} className="btn-primary w-full">
+                Observation naturelle
               </button>
             </>
           )}
 
           {step === 4 && (
             <>
-              <h3>Votre activité idéale :</h3>
-              <button onClick={() => updateScore("paris")} className="btn-primary w-full">
-                Visiter des monuments
+              <h3>Votre rythme de voyage ?</h3>
+              <button onClick={() => addPoint(destinations[0].title)} className="btn-primary w-full">
+                Dynamique et urbain
               </button>
-              <button onClick={() => updateScore("cretace")} className="btn-primary w-full">
-                Observer la faune
+              <button onClick={() => addPoint(destinations[5].title)} className="btn-primary w-full">
+                Méditatif et culturel
               </button>
-              <button onClick={() => updateScore("florence")} className="btn-primary w-full">
-                Explorer des musées
-              </button>
-              <button
-                onClick={calculateResult}
-                className="mt-6 bg-gold text-black px-6 py-3 rounded-lg"
-              >
-                Voir ma recommandation
+              <button onClick={() => addPoint(destinations[7].title)} className="btn-primary w-full">
+                Mystérieux et épique
               </button>
             </>
           )}
+
         </div>
       )}
 
       {result && (
         <div className="max-w-2xl mx-auto mt-10">
-          <h3 className="text-3xl font-bold text-gold mb-4">
+          <h3 className="text-3xl font-bold text-black dark:text-silver mb-4">
             Destination recommandée : {result}
           </h3>
 
           {loading ? (
-            <p>Génération de votre recommandation personnalisée...</p>
+            <p>Génération de votre recommandation...</p>
           ) : (
-            <p className="mt-4 text-gray-300">{explanation}</p>
+            <p className="mt-4 text-gray-800 dark:text-gray-300">
+              {explanation}
+            </p>
           )}
 
           <button

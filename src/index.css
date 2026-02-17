@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* BASE STYLES */
+/* =========================
+   BASE
+========================= */
 
 @layer base {
   body {
@@ -14,41 +16,78 @@
   }
 }
 
-/* VARIABLES COULEURS */
+/* =========================
+   VARIABLES
+========================= */
 
 :root {
-  --gold: #d4af37;
-  --gold-light: #f5d76e;
+  --silver: #cfd3d8;
+  --silver-dark: #b8bcc2;
   --dark-bg: #0f0f0f;
   --dark-card: #1a1a1a;
   --dark-border: #2a2a2a;
 }
 
-.bg-gold {
-  background-color: var(--gold);
+/* =========================
+   UTILITIES
+========================= */
+
+.bg-silver {
+  background-color: var(--silver);
 }
 
-.text-gold {
-  color: var(--gold);
+.bg-silver-dark {
+  background-color: var(--silver-dark);
 }
 
-.border-gold {
-  border-color: var(--gold);
+.text-silver {
+  color: var(--silver);
 }
 
-/* COMPONENTS */
+.border-silver {
+  border-color: var(--silver);
+}
+
+/* =========================
+   COMPONENTS
+========================= */
 
 @layer components {
 
+  /* Bouton principal argent */
   .btn-primary {
-    @apply px-6 sm:px-8 py-3 bg-gold text-black font-semibold rounded-lg hover:opacity-90 hover:scale-105 transition-all duration-300;
+    @apply px-6 sm:px-8 py-3 
+    bg-silver text-black
+    font-semibold rounded-lg
+    hover:opacity-90 hover:scale-105
+    transition-all duration-300;
   }
 
+  /* Boutons header (icônes rondes) */
+  .btn-icon {
+    @apply p-3 rounded-full 
+    bg-silver text-black
+    shadow-lg
+    hover:opacity-90 hover:scale-110
+    transition-all duration-300;
+  }
+
+  /* Cards dynamiques */
   .card-base {
-    @apply bg-white dark:bg-[var(--dark-card)] border border-gray-200 dark:border-[var(--dark-border)] rounded-2xl overflow-hidden shadow-lg transition-all duration-500;
+    @apply bg-white 
+    dark:bg-[#1a1a1a]
+    border border-gray-200 
+    dark:border-[#2a2a2a]
+    rounded-2xl 
+    overflow-hidden 
+    shadow-lg 
+    transition-all duration-500;
   }
 
   .section-title {
-    @apply text-3xl sm:text-4xl md:text-5xl font-playfair font-bold mb-6 tracking-wide;
+    @apply text-3xl sm:text-4xl md:text-5xl 
+    font-playfair font-bold 
+    mb-6 tracking-wide;
   }
 }
+

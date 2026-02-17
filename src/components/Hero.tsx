@@ -4,6 +4,7 @@ export default function Hero() {
   return (
     <section className="relative h-[70vh] md:h-screen flex items-center justify-center text-center px-4 overflow-hidden">
 
+      {/* VIDEO BACKGROUND */}
       <video
         autoPlay
         muted
@@ -14,33 +15,31 @@ export default function Hero() {
         <source src="/hero.mp4" type="video/mp4" />
       </video>
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/50 dark:bg-black/70" />
+      {/* Overlay adaptatif */}
+      <div className="absolute inset-0 bg-black/50 dark:bg-black/70 transition-colors duration-500" />
 
+      {/* ENCADRÉ CENTRAL */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
         className="
-          relative z-10 
-          border border-gold/50 
-          bg-white/10 dark:bg-black/40 
-          backdrop-blur-md 
-          p-6 md:p-10 
-          rounded-xl
+          relative z-10
+          bg-white/80 dark:bg-black/60
+          backdrop-blur-md
+          border border-gray-300 dark:border-gray-600
+          px-8 py-10
+          rounded-2xl
+          shadow-xl
+          max-w-2xl
+          transition-colors duration-500
         "
       >
-        <h1 className="
-          text-3xl md:text-6xl font-bold mb-6
-          text-white dark:text-white
-        ">
+        <h1 className="text-3xl md:text-6xl font-bold mb-6 text-black dark:text-white">
           TimeTravel Agency
         </h1>
 
-        <p className="
-          text-base md:text-2xl
-          text-white dark:text-white
-        ">
+        <p className="text-base md:text-2xl text-gray-700 dark:text-gray-300">
           Explorez l’Histoire. Vivez l’impossible.
         </p>
       </motion.div>

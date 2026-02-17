@@ -11,7 +11,7 @@ export default function Reservations() {
 
         <button
           onClick={() => navigate("/")}
-          className="mb-8 text-sm text-gold font-semibold hover:underline"
+          className="mb-8 text-sm text-silver font-semibold hover:underline"
         >
           ← Retour à l'accueil
         </button>
@@ -24,13 +24,13 @@ export default function Reservations() {
           {reservations.map((reservation) => (
             <div
               key={reservation.id}
-              className="bg-gray-100 dark:bg-zinc-900 p-6 rounded-xl shadow-lg"
+              className="bg-gray-100 dark:bg-zinc-900 p-6 rounded-xl shadow-lg border border-gray-200 dark:border-zinc-800"
             >
               <div className="flex justify-between items-center mb-3">
                 <h2 className="text-lg font-semibold">
                   {reservation.destination}
                 </h2>
-                <span className="text-gold font-semibold">
+                <span className="text-silver font-semibold">
                   {reservation.price}
                 </span>
               </div>
@@ -58,7 +58,6 @@ export default function Reservations() {
             </div>
           ))}
         </div>
-
       </div>
     </div>
   );
