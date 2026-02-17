@@ -6,11 +6,14 @@ import { useTheme } from "./context/ThemeContext";
 import { useSound } from "./context/SoundContext";
 import { Sun, Moon, Volume2, VolumeX } from "lucide-react";
 import { Routes, Route } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Reservation from "./pages/Reservation";
+import Reservations from "./pages/Reservations";
 
 export default function App() {
   const { dark, toggleTheme } = useTheme();
   const { toggleMute, isMuted } = useSound();
+  const navigate = useNavigate();
 
   return (
     <div className={`${dark ? "bg-black text-white" : "bg-white text-black"} min-h-screen transition-colors duration-500`}>
@@ -37,6 +40,14 @@ export default function App() {
           path="/"
           element={
             <>
+              <div className="flex justify-center mt-8">
+                <button
+                  onClick={() => navigate("/reservations")}
+                  className="px-6 py-3 bg-gold text-black rounded-lg font-semibold hover:scale-105 hover:opacity-90 transition-all duration-300"
+                >
+                  Voir les réservations effectuées
+                </button>
+              </div>
               <Hero />
               <Destinations />
               <Quiz />
@@ -45,6 +56,7 @@ export default function App() {
           }
         />
         <Route path="/reservation" element={<Reservation />} />
+        <Route path="/reservations" element={<Reservations />} />
       </Routes>
 
       <div className="text-center text-xs text-gray-400 py-6 px-4">

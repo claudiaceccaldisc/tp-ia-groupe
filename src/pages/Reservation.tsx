@@ -1,7 +1,18 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function Reservation() {
   const navigate = useNavigate();
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setShowPopup(true);
+
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white dark:bg-black transition-colors duration-500 px-4">
@@ -18,7 +29,7 @@ export default function Reservation() {
           Réservation Chronos Elite
         </h1>
 
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleSubmit}>
 
           <div>
             <label className="block text-sm font-medium mb-1">
@@ -28,6 +39,7 @@ export default function Reservation() {
               type="text"
               className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-black"
               placeholder="Votre nom"
+              required
             />
           </div>
 
@@ -39,6 +51,7 @@ export default function Reservation() {
               type="email"
               className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-black"
               placeholder="votre@email.com"
+              required
             />
           </div>
 
@@ -49,6 +62,7 @@ export default function Reservation() {
             <input
               type="date"
               className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-black"
+              required
             />
           </div>
 
@@ -62,6 +76,20 @@ export default function Reservation() {
         </form>
 
       </div>
+
+      {showPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/50">
+          <div className="bg-white dark:bg-zinc-900 p-8 rounded-xl shadow-2xl text-center max-w-sm w-full">
+            <h2 className="text-xl font-bold mb-4 text-green-500">
+              ✅ Réservation confirmée
+            </h2>
+            <p className="text-sm mb-6">
+              Redirection vers l'accueil...
+            </p>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
