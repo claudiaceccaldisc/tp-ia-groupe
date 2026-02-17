@@ -70,8 +70,11 @@ export default function App() {
         </motion.div>
       </AnimatePresence>
 
-      <div className="text-center text-xs text-gray-400 py-6 px-4">
+      <div className="text-center text-xs text-gray-400 py-4">
         Les prix affichés sont fictifs et utilisés uniquement à des fins pédagogiques.
+      </div>
+      <div className="text-center text-xs text-gray-400 py-3">
+         Site créé par CECCALDI Claudia, LEONARD Chloé, PINATEL Arnaud
       </div>
     </div>
   );
