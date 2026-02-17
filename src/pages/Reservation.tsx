@@ -30,7 +30,7 @@ export default function Reservation() {
       id: Date.now(),
       destination: title || "Destination inconnue",
       client: clientName,
-      date: date,
+      date,
       status: "Confirmée",
       price: price || "—"
     });
@@ -44,11 +44,12 @@ export default function Reservation() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white dark:bg-black transition-colors duration-500 px-4">
-      <div className="bg-gray-100 dark:bg-zinc-900 p-8 sm:p-10 rounded-2xl shadow-2xl max-w-xl w-full">
+      <div className="bg-gray-100 dark:bg-zinc-900 p-8 sm:p-10 rounded-2xl shadow-2xl max-w-xl w-full border border-gray-200 dark:border-zinc-800">
 
+        {/* Retour */}
         <button
           onClick={() => navigate("/")}
-          className="mb-6 text-sm text-gold font-semibold hover:underline"
+          className="mb-6 text-sm text-black dark:text-silver font-semibold hover:underline"
         >
           ← Retour à l'accueil
         </button>
@@ -58,7 +59,7 @@ export default function Reservation() {
         </h1>
 
         {title && (
-          <div className="mb-6 p-4 bg-black/5 dark:bg-white/5 rounded-lg text-center">
+          <div className="mb-6 p-4 bg-black/5 dark:bg-white/5 rounded-lg text-center border border-gray-200 dark:border-zinc-800">
             <p className="text-sm text-gray-500 dark:text-gray-400">
               Destination sélectionnée
             </p>
@@ -66,7 +67,8 @@ export default function Reservation() {
               {title} {year && `- ${year}`}
             </p>
             {price && (
-              <p className="text-gold font-semibold mt-1">
+              <p className="text-black dark:text-silver font-semibold mt-1">
+
                 {price}
               </p>
             )}
@@ -81,7 +83,7 @@ export default function Reservation() {
             <input
               name="name"
               type="text"
-              className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-black"
+              className="w-full p-3 rounded-lg border border-gray-300 dark:border-zinc-700 bg-white dark:bg-black focus:ring-2 focus:ring-silver transition"
               placeholder="Votre nom"
               required
             />
@@ -93,7 +95,7 @@ export default function Reservation() {
             </label>
             <input
               type="email"
-              className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-black"
+              className="w-full p-3 rounded-lg border border-gray-300 dark:border-zinc-700 bg-white dark:bg-black focus:ring-2 focus:ring-silver transition"
               placeholder="votre@email.com"
               required
             />
@@ -106,20 +108,29 @@ export default function Reservation() {
             <input
               name="date"
               type="date"
-              className="w-full p-3 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-black"
+              className="w-full p-3 rounded-lg border border-gray-300 dark:border-zinc-700 bg-white dark:bg-black focus:ring-2 focus:ring-silver transition"
               required
             />
           </div>
 
           <button
             type="submit"
-            className="w-full py-3 bg-gold text-black rounded-lg font-semibold hover:scale-105 hover:opacity-90 transition-all duration-300"
+            className="
+  w-full py-3 
+  bg-gray-900 text-white
+  dark:bg-silver dark:text-black
+  rounded-lg font-semibold
+  hover:opacity-90 hover:scale-105
+  transition-all duration-300
+"
+
           >
             Confirmer la réservation
           </button>
         </form>
       </div>
 
+      {/* POPUP */}
       <AnimatePresence>
         {showPopup && (
           <motion.div
@@ -129,45 +140,23 @@ export default function Reservation() {
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="bg-white dark:bg-zinc-900 p-10 rounded-2xl shadow-2xl text-center max-w-sm w-full border border-gold/40"
+              className="bg-white dark:bg-zinc-900 p-10 rounded-2xl shadow-2xl text-center max-w-sm w-full border border-silver/40"
               initial={{ y: 80, scale: 0.7, opacity: 0 }}
               animate={{ y: 0, scale: 1, opacity: 1 }}
               exit={{ y: 80, scale: 0.7, opacity: 0 }}
               transition={{ type: "spring", stiffness: 120, damping: 12 }}
-              style={{ boxShadow: "0 0 40px rgba(212, 175, 55, 0.4)" }}
             >
-              <motion.h2
-                className="text-2xl font-bold mb-6 text-green-500"
-                initial={{ scale: 0.8 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.2 }}
-              >
-                ✅ Réservation confirmée
-              </motion.h2>
+              <h2 className="text-2xl font-bold mb-6 text-green-500">
+                Réservation confirmée
+              </h2>
 
               {reservationNumber && (
-                <motion.p
-                  className="text-gold font-semibold mb-6 text-lg"
-                  animate={{ scale: [1, 1.1, 1] }}
-                  transition={{ repeat: Infinity, duration: 1.5 }}
-                >
+                <p className="text-silver font-semibold mb-6 text-lg">
                   Numéro : {reservationNumber}
-                </motion.p>
+                </p>
               )}
 
-              <motion.div
-                className="mx-auto w-12 h-12 rounded-full"
-                style={{
-                  border: "4px solid #D4AF37",
-                  borderTop: "4px solid transparent"
-                }}
-                animate={{ rotate: 360 }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 0.8,
-                  ease: "linear"
-                }}
-              />
+              <div className="mx-auto w-12 h-12 rounded-full border-4 border-silver border-t-transparent animate-spin" />
 
               <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
                 Redirection vers l'accueil...
@@ -176,7 +165,6 @@ export default function Reservation() {
           </motion.div>
         )}
       </AnimatePresence>
-
     </div>
   );
 }
