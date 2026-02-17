@@ -51,7 +51,7 @@ const destinations = [
   {
     title: "Réunion ~1690",
     year: "vers 1690 ap. J.-C.",
-    description: "Île inhabitée de Bourbon (future Réunion), époque où le dodo s'éteignait à Maurice voisine ; forêts denses, volcans et premières explorations pirates avant colonisation française.",
+    description: "Visitez une île inhabitée à l'époque des dodos.",
     image: ["/reunion-1.png", "/reunion-2.png"],
     highlights: [
       "Piton de Neiges",
