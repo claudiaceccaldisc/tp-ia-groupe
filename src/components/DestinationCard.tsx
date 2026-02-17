@@ -38,6 +38,11 @@ export default function DestinationCard({
     if (title.includes("Crétacé")) playEffect("dino");
     else if (title.includes("Florence")) playEffect("renaissance");
     else if (title.includes("Paris")) playEffect("paris");
+    else if (title.includes("Rome")) playEffect("rome80");
+    else if (title.includes("Réunion")) playEffect("reunion1690");
+    else if (title.includes("Kyoto")) playEffect("kyoto794");
+    else if (title.includes("Londres")) playEffect("londres1605");
+    else if (title.includes("Machu Picchu")) playEffect("inca1450");
 
     navigate("/reservation", {
       state: { title, year, price: getPrice() },
