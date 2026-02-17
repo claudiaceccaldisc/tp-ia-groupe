@@ -41,7 +41,7 @@ export default function DestinationCard({
     else if (title.includes("Florence")) playEffect("renaissance");
     else if (title.includes("Paris")) playEffect("paris");
 
-    navigate("/reservation");
+    navigate("/reservation", { state: { title, year, price: getPrice() } });
   };
 
   return (

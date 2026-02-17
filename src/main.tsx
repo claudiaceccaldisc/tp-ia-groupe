@@ -4,6 +4,7 @@ import App from "./App";
 import "./index.css";
 import { ThemeProvider } from "./context/ThemeContext";
 import { SoundProvider } from "./context/SoundContext";
+import { ReservationProvider } from "./context/ReservationContext";
 import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -11,7 +12,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
       <ThemeProvider>
         <SoundProvider>
-          <App />
+          <ReservationProvider>
+            <App />
+          </ReservationProvider>
         </SoundProvider>
       </ThemeProvider>
     </BrowserRouter>

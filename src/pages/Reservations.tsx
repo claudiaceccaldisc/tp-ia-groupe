@@ -1,34 +1,9 @@
 import { useNavigate } from "react-router-dom";
+import { useReservations } from "../context/ReservationContext";
 
 export default function Reservations() {
   const navigate = useNavigate();
-
-  const reservations = [
-    {
-      id: 1,
-      destination: "Paris 1889",
-      client: "Jean Dupont",
-      date: "12/06/2026",
-      status: "Confirmée",
-      price: "20 000€"
-    },
-    {
-      id: 2,
-      destination: "Florence 1504",
-      client: "Marie Lambert",
-      date: "03/09/2026",
-      status: "En attente",
-      price: "25 000€"
-    },
-    {
-      id: 3,
-      destination: "Crétacé",
-      client: "Lucas Martin",
-      date: "18/11/2026",
-      status: "Confirmée",
-      price: "35 000€"
-    }
-  ];
+  const { reservations } = useReservations();
 
   return (
     <div className="min-h-screen bg-white dark:bg-black transition-colors duration-500 px-4 py-12">
