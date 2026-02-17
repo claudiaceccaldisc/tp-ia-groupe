@@ -18,7 +18,10 @@ export default function Reservation() {
 
     const formData = new FormData(e.currentTarget);
     const clientName = formData.get("name") as string;
-    const date = formData.get("date") as string;
+    const rawDate = formData.get("date") as string;
+
+    const [yearValue, monthValue, dayValue] = rawDate.split("-");
+    const date = `${dayValue}/${monthValue}/${yearValue}`;
 
     const randomNumber = Math.floor(10000 + Math.random() * 90000);
     setReservationNumber(`CE-${randomNumber}`);
