@@ -108,11 +108,11 @@ export default function Destinations() {
   return (
     <section className="py-20 px-4 transition-colors duration-500">
       <div className="max-w-7xl mx-auto text-center mb-14">
-        <h2 className="section-title text-silver">
+        <h2 className="section-title text-black dark:text-silver">
           Destinations temporelles
         </h2>
 
-        <p className="text-gray-400 max-w-xl mx-auto">
+        <p className="text-gray-700 dark:text-gray-400 max-w-xl mx-auto">
           Explorez des époques fascinantes et vivez une immersion exclusive à travers l’Histoire.
         </p>
       </div>
