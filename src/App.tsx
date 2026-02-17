@@ -5,6 +5,8 @@ import ChatbotButton from "./components/ChatbotButton";
 import { useTheme } from "./context/ThemeContext";
 import { useSound } from "./context/SoundContext";
 import { Sun, Moon, Volume2, VolumeX } from "lucide-react";
+import { Routes, Route } from "react-router-dom";
+import Reservation from "./pages/Reservation";
 
 export default function App() {
   const { dark, toggleTheme } = useTheme();
@@ -30,10 +32,20 @@ export default function App() {
         </button>
       </div>
 
-      <Hero />
-      <Destinations />
-      <Quiz />
-      <ChatbotButton />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <Hero />
+              <Destinations />
+              <Quiz />
+              <ChatbotButton />
+            </>
+          }
+        />
+        <Route path="/reservation" element={<Reservation />} />
+      </Routes>
 
       <div className="text-center text-xs text-gray-400 py-6 px-4">
         Les prix affichés sont fictifs et utilisés uniquement à des fins pédagogiques.

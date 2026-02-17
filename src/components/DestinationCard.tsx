@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useSound } from "../context/SoundContext";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface DestinationCardProps {
   title: string;
@@ -18,6 +19,7 @@ export default function DestinationCard({
   highlights,
 }: DestinationCardProps) {
   const { playEffect } = useSound();
+  const navigate = useNavigate();
 
   // Prix indicatif selon destination
   const getPrice = () => {
@@ -38,6 +40,8 @@ export default function DestinationCard({
     if (title.includes("Crétacé")) playEffect("dino");
     else if (title.includes("Florence")) playEffect("renaissance");
     else if (title.includes("Paris")) playEffect("paris");
+
+    navigate("/reservation");
   };
 
   return (
