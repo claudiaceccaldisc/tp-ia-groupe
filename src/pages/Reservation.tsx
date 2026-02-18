@@ -118,7 +118,7 @@ export default function Reservation() {
             className="
   w-full py-3 
   bg-gray-900 text-white
-  dark:bg-silver dark:text-black
+  dark:bg-gold dark:text-black
   rounded-lg font-semibold
   hover:opacity-90 hover:scale-105
   transition-all duration-300

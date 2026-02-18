@@ -26,14 +26,14 @@ export default function App() {
       <div className="fixed top-4 right-4 z-50 flex gap-3">
         <button
           onClick={toggleTheme}
-          className="p-3 rounded-full bg-silver text-black shadow-lg hover:scale-110 hover:opacity-90 transition-all duration-300"
+          className="p-3 rounded-full bg-gold text-black shadow-lg hover:scale-110 hover:opacity-90 transition-all duration-300"
         >
           {dark ? <Sun size={18} /> : <Moon size={18} />}
         </button>
 
         <button
           onClick={toggleMute}
-          className="p-3 rounded-full bg-silver text-black shadow-lg hover:scale-110 hover:opacity-90 transition-all duration-300"
+          className="p-3 rounded-full bg-gold text-black shadow-lg hover:scale-110 hover:opacity-90 transition-all duration-300"
         >
           {isMuted ? <VolumeX size={18} /> : <Volume2 size={18} />}
         </button>
@@ -55,7 +55,7 @@ export default function App() {
                   <div className="flex justify-center mt-8">
                     <button
                       onClick={() => navigate("/reservations")}
-                      className="px-6 py-3 bg-silver text-black rounded-lg font-semibold hover:scale-105 hover:opacity-90 transition-all duration-300"
+                      className="px-6 py-3 bg-gold text-black rounded-lg font-semibold hover:scale-105 hover:opacity-90 transition-all duration-300"
                     >
                       Voir les réservations effectuées
                     </button>

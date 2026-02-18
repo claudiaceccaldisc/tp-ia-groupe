@@ -112,8 +112,8 @@ export default function DestinationCard({
                   onClick={() => setCurrentImageIndex(index)}
                   className={`h-2 rounded-full transition-all ${
                     index === currentImageIndex
-                      ? "w-5 bg-silver"
-                      : "w-2 bg-silver/40 hover:bg-silver"
+                      ? "w-5 bg-gold"
+                      : "w-2 bg-gold/40 hover:bg-gold"
                   }`}
                 />
               ))}
@@ -130,7 +130,7 @@ export default function DestinationCard({
     <h3 className="text-lg sm:text-xl font-bold tracking-wide text-black dark:text-white">
       {title}
     </h3>
-    <span className="text-black dark:text-silver text-sm sm:text-base font-semibold">
+    <span className="text-gold dark:text-silver text-sm sm:text-base font-semibold">
   {year}
 </span>
 
@@ -143,7 +143,7 @@ export default function DestinationCard({
 
   {/* Prix */}
   <div className="mb-4">
-    <p className="text-black dark:text-silver font-semibold text-base sm:text-lg">
+    <p className="text-gold dark:text-silver font-semibold text-base sm:text-lg">
       {getPrice()}
     </p>
     <p className="text-xs text-gray-600 dark:text-gray-500">
@@ -158,7 +158,7 @@ export default function DestinationCard({
         key={index}
         className="flex items-center gap-2 text-xs sm:text-sm text-black dark:text-gray-400"
       >
-        <span className="w-2 h-2 bg-black dark:bg-silver rounded-full" />
+        <span className="w-2 h-2 bg-gold dark:bg-gold rounded-full" />
         {item}
       </li>
     ))}
@@ -167,7 +167,7 @@ export default function DestinationCard({
   {/* Bouton */}
   <button
     onClick={handleClick}
-    className="w-full py-2 sm:py-3 bg-silver text-black rounded-lg font-semibold tracking-wide hover:brightness-90 hover:scale-105 transition-all duration-300"
+    className="w-full py-2 sm:py-3 bg-gold text-black rounded-lg font-semibold tracking-wide hover:brightness-90 hover:scale-105 transition-all duration-300"
   >
     Réserver
   </button>
