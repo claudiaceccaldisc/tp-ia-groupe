@@ -99,7 +99,7 @@ Les prix sont fictifs.
       {/* BOUTON */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-5 right-5 w-14 h-14 rounded-full bg-silver text-black shadow-xl flex items-center justify-center hover:scale-110 transition-all duration-300 z-50"
+        className="fixed bottom-5 right-5 w-14 h-14 rounded-full bg-gold text-black shadow-xl flex items-center justify-center hover:scale-110 transition-all duration-300 z-50"
       >
         {isOpen ? <X size={22} /> : <MessageCircle size={22} />}
       </button>
@@ -132,7 +132,7 @@ Les prix sont fictifs.
                 <div
                   className={`max-w-[75%] px-4 py-2 rounded-xl text-sm ${
                     msg.role === "user"
-                      ? "bg-silver text-black"
+                      ? "bg-gold text-black"
                       : "bg-gray-200 dark:bg-[#2e2e2e] text-gray-900 dark:text-gray-200"
                   }`}
                 >
@@ -165,7 +165,7 @@ Les prix sont fictifs.
               />
               <button
                 type="submit"
-                className="bg-silver text-black font-semibold px-4 py-2 rounded-lg hover:bg-silver-dark transition-all duration-200"
+                className="bg-gold text-black font-semibold px-4 py-2 rounded-lg hover:bg-gold-dark transition-all duration-200"
               >
                 OK
               </button>
