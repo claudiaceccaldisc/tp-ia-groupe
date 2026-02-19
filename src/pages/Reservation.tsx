@@ -114,19 +114,12 @@ export default function Reservation() {
           </div>
 
           <button
-            type="submit"
-            className="
-  w-full py-3 
-  bg-gray-900 text-white
-  dark:bg-gold dark:text-black
-  rounded-lg font-semibold
-  hover:opacity-90 hover:scale-105
-  transition-all duration-300
-"
+  type="submit"
+  className="w-full py-3 bg-gold text-black rounded-lg font-semibold hover:scale-105 hover:opacity-90 transition-all duration-300"
+>
+  Confirmer la réservation
+</button>
 
-          >
-            Confirmer la réservation
-          </button>
         </form>
       </div>
 
