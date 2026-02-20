@@ -48,23 +48,53 @@ Créer une webapp interactive intégrant :
 -   Londres 1605\
 -   Machu Picchu 1450
 
+    #  Fonctionnalités :
+
+- Cards interactives animées
+- Carrousel d’images par destination
+- Prix dynamiques (usage pédagogique uniquement)
+- Navigation vers système de réservation
+- Animations au scroll (Framer Motion)
+- Adaptation automatique au thème clair/sombre
+
+  # Système de Réservation
+
+- Formulaire interactif
+- Génération automatique d’un numéro de réservation
+- Confirmation animée
+- Gestion d’un contexte global (ReservationContext)
+- Page listant les réservations effectuées
+  
 ------------------------------------------------------------------------
 
 # 🤖 Fonctionnalités IA
 
 ## Chatbot Intelligent
 
--   Réponses en français uniquement
--   Ton professionnel et immersif
--   Nettoyage automatique du markdown
--   Gestion des erreurs & loading
+Widget conversationnel intelligent :
+- Bouton flottant
+- Réponses en français uniquement
+- Ton professionnel et immersif
+- Texte simple sans markdown
+- Nettoyage automatique des caractères spéciaux
+- Gestion des erreurs et loading
+
+Capacités :
+- Présentation des destinations
+- Conseils personnalisés
+- FAQ
+- Explications contextuelles
+- Informations sur les prix (fictifs)
 
 ## Quiz Intelligent
 
--   Analyse des préférences utilisateur
--   Attribution dynamique de scores
--   Recommandation automatique
--   Génération d'une explication personnalisée via IA
+Quiz interactif permettant :
+- Analyse des préférences utilisateur
+- Attribution dynamique de scores
+- Recommandation automatique d’une destination
+- Génération IA d’une explication personnalisée
+- Nettoyage automatique du formatage IA
+- Le quiz prend en compte l’ensemble des destinations disponibles.
 
 ------------------------------------------------------------------------
 
@@ -76,13 +106,51 @@ Créer une webapp interactive intégrant :
 
 ------------------------------------------------------------------------
 
-# 📝 Système de Réservation
+# 🔊 Gestion Audio
 
--   Formulaire interactif
--   Génération automatique d'un numéro de réservation
--   Confirmation animée
--   Liste des réservations effectuées
+- Activation / désactivation du son
+- Effets sonores contextuels selon destination
+- SoundContext dédié
 
+------------------------------------------------------------------------
+
+# 🌍 Déploiement
+
+Déploiement continu via Vercel
+
+- Variables d’environnement sécurisées
+- URL publique accessible
+- CI/CD automatique
+
+------------------------------------------------------------------------
+# 🤖 Outils IA Utilisés
+
+- Génération initiale de structure via Bolt.new
+- Assistance développement via IA générative
+
+API Mistral AI pour :
+    - Chatbot conversationnel
+    - Explication personnalisée du quiz
+- Itérations de prompts pour améliorer qualité et cohérence
+
+# 🧠 Exemple de Prompt Système (Chatbot)
+
+Tu es l'assistant virtuel officiel de TimeTravel Agency.
+Tu réponds en français uniquement.
+Tu es professionnel, immersif et structuré.
+Tu n'utilises pas de markdown ni de formatage spécial.
+
+Destinations disponibles :
+Paris 1889
+Florence 1504
+Crétacé
+Rome 80
+Réunion ~1690
+Kyoto 794
+Londres 1605
+Machu Picchu 1450
+
+Les prix sont fictifs et utilisés uniquement à des fins pédagogiques.
 ------------------------------------------------------------------------
 
 # 🚀 Installation en Local
